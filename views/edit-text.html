@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/css/base.css" rel="stylesheet">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<div class="headtop"></div>
+<nav class="navbar navbar-default col-sm-12" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><strong>Cay博客管理后台</strong></a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> 陈伟</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 退出</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 " style="border: 1px solid #d9dadc;background-color: #fff;min-height: 700px;">
+            <div style="border-bottom:1px solid #d9dadc;height: 40px ">
+                <ol class="breadcrumb" style="margin-top: 3px;background-color: #fff;">
+                    <li><a href="#">首页</a></li>
+                    <li class="active">编辑文章</li>
+                </ol>
+            </div>
+            <form class="form-horizontal" role="form" style="margin-top: 15px">
+                <div class="form-group">
+                    <label for="c_title" class="col-sm-1 control-label">文章标题</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="c_title" placeholder="请输入文章标题">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="c_author" class="col-sm-1 control-label">作者</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="c_author" placeholder="请输入作者姓名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div id="editor" class="col-sm-11" style="height: 350px">
+                    </div>
+                    <script type="text/javascript" charset="utf-8" src="/static/js/UEditor/ueditor.config.js"></script>
+                    <script type="text/javascript" charset="utf-8" src="/static/js/UEditor/ueditor.all.min.js"> </script>
+                    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+                    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+                    <script type="text/javascript" charset="utf-8" src="/static/js/UEditor/lang/zh-cn/zh-cn.js"></script>
+                    <script type="text/javascript">
+                        var ue = UE.getEditor('editor');
+                    </script>
+                </div>
+
+                <div class="form-group">
+                    <label for="c_classify" class="col-sm-1 control-label">类型</label>
+                    <div>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadiosinline" id="c_classify0"  value="option2"> 慢生活
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadiosinline" id="c_classify" value="option1"> Android
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadiosinline" id="c_classify1"  value="option2"> Golang
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadiosinline" id="c_classify2" value="option1"> PHP
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadiosinline" id="c_classify3"  value="option2"> MySql
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadiosinline" id="c_classify4" value="option1"> JAVA
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadiosinline" id="c_classify5"  value="option2"> HTML/CSS
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadiosinline" id="c_classify6"  value="option2"> JavaScript
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadiosinline" id="c_classify7"  value="option2"> jQuery
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="c_coverimg" class="col-sm-1 control-label" >封面图片</label>
+                    <div class="col-sm-4">
+                        <input type="file"  id="c_coverimg" onchange="preImg(this.id,'photo');">
+                    </div>
+                </div>
+                <div class="form-group hidden" id="imgShow" style="margin-bottom: 15px">
+                    <div class="col-sm-offset-1">
+                        <img id="photo" src="" width="250px" height="250px" style="display: block;" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="c_abstract" class="col-sm-1 control-label">摘要</label>
+                    <div class=" col-sm-11">
+                        <textarea class="form-control" rows="3" id="c_abstract" placeholder="请输入文章摘要"></textarea>
+                    </div>
+                </div>
+                <div class="form-group" >
+                    <div class="col-sm-offset-4 col-sm-1">
+                        <button type="submit" class="btn btn-success">保存</button>
+                    </div>
+                    <div class="col-sm-offset-2 col-sm-1">
+                        <button type="submit" class="btn btn-default">预览</button>
+                    </div>
+                </div>
+
+
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function getFileUrl(sourceId) {
+        var url;
+        if (navigator.userAgent.indexOf("MSIE")>=1) { // IE
+            url = document.getElementById(sourceId).value;
+        } else if(navigator.userAgent.indexOf("Firefox")>0) { // Firefox
+            url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
+        } else if(navigator.userAgent.indexOf("Chrome")>0) { // Chrome
+            url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
+        }
+        return url;
+    }
+    function preImg(sourceId, targetId) {
+        var url = getFileUrl(sourceId);
+        var imgPre = document.getElementById(targetId);
+        imgPre.src = url;
+        var imgShow = document.getElementById("imgShow");
+
+        imgShow.setAttribute("class", "show");
+    }
+</script>
+</html>

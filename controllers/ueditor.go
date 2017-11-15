@@ -6,18 +6,29 @@ import (
 	"log"
 	"io/ioutil"
 	"fmt"
-//	"encoding/json"
+	"myblog/utils"
+	"strconv"
 )
 
 type UEditorController struct {
 	beego.Controller
 }
 type UploadImageBC struct {
-	url      string
-	title    string
-	original string
-	state    string
+	Url      string `json:"url"`
+	Title    string `json:"title"`
+	Original string `json:"original"`
+	State    string `json:"state"`
 }
+type imageinfo struct {
+	Url string `json:"url"`
+}
+type ListImages struct {
+	State    string `json:"state"`
+	List    interface{} `json:"list"`
+	Start int `json:"start"`
+	Total int `json:"total"`
+}
+
 func (c *UEditorController) GetAndPost(){
 	ac := c.GetString("action")
 	fmt.Println("======="+ac)
@@ -56,22 +67,46 @@ func (c *UEditorController) GetAndPost(){
 		if err !=nil {
 			beego.Error(err)
 		}
-		/*uploadImageBC :=UploadImageBC{
-			 "/static/img/upload/" +h.Filename,
-			  h.Filename,
-			h.Filename,
-			 "SUCCESS",
-			}
-			//c.Data["json"]=uploadImageBC
-		bc,err:=json.Marshal(uploadImageBC)
-		if err !=nil{
-			beego.Error(err)
-		}
-		fmt.Println("--------------",string(bc))
-		c.Ctx.WriteString(string(bc))*/
-		c.Data["json"] = map[string]interface{}{"state": "SUCCESS", "url": "/static/img/upfile/" +h.Filename, "title": h.Filename, "original": h.Filename}
+	uploadImageBC :=UploadImageBC{
+				 "/static/img/upfile/" +h.Filename,
+				  h.Filename,
+				h.Filename,
+				 "SUCCESS",
+				}
+				c.Data["json"]=uploadImageBC
+			/*bc,err:=json.Marshal(uploadImageBC)
+			if err !=nil{
+				beego.Error(err)
+			}*/
+		//	c.Ctx.WriteString(string(bc))
+		//c.Data["json"] = map[string]interface{}{"state": "SUCCESS", "url": "/static/img/upfile/" +h.Filename, "title": h.Filename, "original": h.Filename}
 
 		c.ServeJSON()
+	case "listimage":
+		start,_:= strconv.Atoi(c.GetString("start"))
+		total,_ :=strconv.Atoi( c.GetString("total"))
+		fmt.Println(">>>>>>>>>>>>>>>start",start)
+		fmt.Println(">>>>>>>>>>>>>>>total",total)
+
+		list,_:=utils.ListDir(".\\static\\img\\upfile","","/static/img/upfile/")
+
+		urllist:= []imageinfo{}
+		for _,l :=range list{
+			urllist = append(urllist, imageinfo{l})
+		}
+		c.Data["json"] = ListImages{"SUCCESS",urllist,start,total}
+		c.ServeJSON()
+	case "deleteimage":
+		fmt.Println("shanchu")
+		fmt.Println(c.GetString("path"))
+		err := os.Remove("."+c.GetString("path"))
+		if err!=nil{
+			//log.Fatal(err)
+			c.Ctx.WriteString("删除失败")
+
+		}else {
+			c.Ctx.WriteString("文件删除成功")
+		}
 
 	}
 

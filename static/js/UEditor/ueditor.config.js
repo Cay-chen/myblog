@@ -270,7 +270,7 @@
         //elementPathEnabled
         //是否启用元素路径，默认是显示
         //,elementPathEnabled : true
-
+        ,elementPathEnabled : false
         //wordCount
         //,wordCount:true          //是否开启字数统计
         //,maximumWords:10000       //允许的最大字符数

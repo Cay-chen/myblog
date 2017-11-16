@@ -11,7 +11,9 @@ body {
 }
 img {
 	border: 0;
+    /*
 	display: block
+    */
 }
 ul, ol, li {
 	list-style: none;

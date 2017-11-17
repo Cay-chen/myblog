@@ -9,6 +9,8 @@
 <link href="/static/css/main.css" rel="stylesheet">
   <script type="text/javascript" charset="utf-8" src="/static/js/UEditor/ueditor.parse.js"></script>
   <script type="text/javascript" charset="utf-8" src="/static/js/UEditor/ueditor.config.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/static/js/UEditor/third-party/SyntaxHighlighter/shCore.js"></script>
+
 
   <script type="text/javascript" charset="utf-8" src="/static/js/UEditor/ueditor.all.min.js"> </script>
   <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
@@ -24,7 +26,7 @@
   <header>
     <div class="headtop"></div>
     <div class="contenttop">
-      <div class="logo f_l">个人博客模板古典系列之――江南墨卷</div>
+      <div class="logo f_l">Cay-Chen博客</div>
       <div class="search f_r">
         <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
           <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
@@ -73,30 +75,9 @@
     <div class="con_content">
     <div class="container">
     <div class="row">
-      <div class="col-xs-12 " style="border: 1px solid #d9dadc;background-color: #fff;min-height: 700px;" id="mcontent">
-
-
-        <h1 style="font-size: 32px; font-weight: bold; border-bottom: 2px solid rgb(204, 204, 204); padding: 0px 4px 0px 0px; text-align: center; margin: 0px 0px 20px;">我的第二次代码测试</h1><p>这是一段代码<br/></p><pre class="brush:html;toolbar:false">
-&lt;!DOCTYPE&nbsp;HTML&gt;
-&lt;html&gt;
-
-&lt;head&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta&nbsp;charset=&quot;UTF-8&quot;&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;ueditor&nbsp;demo&lt;/title&gt;
-&lt;/head&gt;
-
-&lt;body&gt;
-&nbsp;&nbsp;&lt;h1&nbsp;style=&quot;font-size:&nbsp;32px;&nbsp;font-weight:&nbsp;bold;&nbsp;border-bottom:&nbsp;2px&nbsp;solid&nbsp;rgb(204,&nbsp;204,&nbsp;204);&nbsp;padding:&nbsp;0px&nbsp;4px&nbsp;0px&nbsp;0px;&nbsp;text-align:&nbsp;center;&nbsp;margin:&nbsp;0px&nbsp;0px&nbsp;20px;&quot;&gt;百度EUditor&nbsp;Golang&nbsp;配置&lt;/h1&gt;&lt;p&gt;Golang&nbsp;是百度开源的一个富文本，其中功能强大。&lt;br/&gt;&lt;/p&gt;&lt;p&nbsp;style=&quot;text-align:center&quot;&gt;&lt;img&nbsp;src=&quot;http://localhost:8081/static/img/upfile/01.jpg&quot;&nbsp;alt=&quot;01.jpg&quot;/&gt;&lt;/p&gt;&lt;p&gt;这个是很好的说明&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&nbsp;
-&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&nbsp;width=&quot;330&quot;&nbsp;valign=&quot;top&quot;&nbsp;style=&quot;word-break:&nbsp;break-all;&quot;&gt;学号&lt;/td&gt;&lt;td&nbsp;width=&quot;330&quot;&nbsp;valign=&quot;top&quot;&nbsp;style=&quot;word-break:&nbsp;break-all;&quot;&gt;姓名&lt;/td&gt;&lt;td&nbsp;width=&quot;330&quot;&nbsp;valign=&quot;top&quot;&nbsp;style=&quot;word-break:&nbsp;break-all;&quot;&gt;成绩&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&nbsp;width=&quot;330&quot;&nbsp;valign=&quot;top&quot;&nbsp;style=&quot;word-break:&nbsp;break-all;&quot;&gt;02&lt;/td&gt;&lt;td&nbsp;width=&quot;330&quot;&nbsp;valign=&quot;top&quot;&nbsp;style=&quot;word-break:&nbsp;break-all;&quot;&gt;陈伟&lt;/td&gt;&lt;td&nbsp;width=&quot;330&quot;&nbsp;valign=&quot;top&quot;&nbsp;style=&quot;word-break:&nbsp;break-all;&quot;&gt;89&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
-
-&lt;/body&gt;
-
-&lt;/html&gt;</pre><p>&nbsp;以上为HTML代码</p>
-
-
-
-
-        <!-- container代码 结束 -->
+      <div id="mcontent1" class="col-xs-12 " style="border: 1px solid #d9dadc;background-color: #fff;min-height: 700px; padding: 20px" >
+        {{.content}}
+                <!-- container代码 结束 -->
       </div>
       </div>
     </div>
@@ -119,8 +100,12 @@
 </body>
 <script>
 
-  uParse("#mcontent",{
-      rootPath: '/static/js/UEditor/'
-  });
+    uParse(
+        '#mcontent1',
+        {
+        rootPath : '../../',
+        chartContainerHeight:500
+    }
+    );
 </script>
 </html>

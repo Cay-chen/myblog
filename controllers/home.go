@@ -11,7 +11,6 @@ type MainController struct {
 
 func (c *MainController) Get() {
 	fmt.Println("Aaaa")
-	//.TplName = "edit-text.html"
-	c.TplName = "about.html"
+	c.TplName = "edit-text.html"
 
 }

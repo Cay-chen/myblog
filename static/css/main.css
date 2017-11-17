@@ -1,7 +1,8 @@
 @charset "gb2312";
 .con_content {
 	overflow: hidden;
-	width: 958px;
+	width: 90%;
+	max-width: 1250px;
 	margin: auto;
 	border: #CCC 1px solid
 }

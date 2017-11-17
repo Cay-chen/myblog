@@ -81,7 +81,8 @@ header {
 	height: 28px;
 }
 .contenttop {
-	width: 1000px;
+	width: 90%;
+	max-width: 1250px;
 	margin: auto;
 }
 .logo {

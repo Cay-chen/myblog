@@ -10,5 +10,6 @@ func init() {
     beego.Router("/controller",&controllers.UEditorController{},"*:GetAndPost")
 	beego.Router("/upcontext", &controllers.UpContextControllers{})
 	beego.Router("/view", &controllers.ViewController{})
+	beego.Router("/editor",&controllers.EditorController{})
 
 }

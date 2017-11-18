@@ -16,7 +16,6 @@
                 return url.replace(/\/$/,'')
             },
             extend : function(t,s){
-                console.log("dasdasd");
                 var a = arguments,
                     notCover = this.isBoolean(a[a.length - 1]) ? a[a.length - 1] : false,
                     len = this.isBoolean(a[a.length - 1]) ? a.length - 1 : a.length;
@@ -30,7 +29,6 @@
                         }
                     }
                 }
-                console.log("------------:"+t);
                 return t;
             },
             isIE : isIE,
@@ -308,7 +306,6 @@
             parselist[parseName] = fn;
         },
         load : function(opt){
-            console.log("000000000000000000");
             utils.each(parselist,function(v){
                 v.call(opt,utils);
             })
@@ -333,7 +330,6 @@
                     contents = document.getElementsByTagName(selector)
                 }
             }
-            console.log("=========================",contents);
             utils.each(contents,function(v){
                 UE.parse.load(utils.extend({root:v,selector:selector},opt))
             })

@@ -2,9 +2,9 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
-	"fmt"
 	"os"
 	"github.com/astaxie/beego/orm"
+	"fmt"
 )
 
 type UpContextControllers struct{
@@ -17,13 +17,6 @@ func (c *UpContextControllers) Post(){
 	context := c.GetString("context")
 	optionsRadiosinline := c.GetString("optionsRadiosinline")
 	abstract := c.GetString("abstract")
-
-
-	fmt.Println("--------------title:",c.GetString("title"))
-	fmt.Println("--------------author:",c.GetString("author"))
-	fmt.Println("--------------context:",c.GetString("context"))
-	fmt.Println("--------------optionsRadiosinline:",c.GetString("optionsRadiosinline"))
-	fmt.Println("--------------abstract:",c.GetString("abstract"))
 	//创建上传文件夹
 	path := ".\\static\\img\\coverimg"
 	err := os.MkdirAll(path,0777)
@@ -43,12 +36,13 @@ func (c *UpContextControllers) Post(){
 	if err !=nil {
 		beego.Error(err)
 	}
-	insert_sql := "INSERT INTO content ( title, author,abstract,content,coverimmag,classify,uptime ) VALUES ( '"+title+"','" +author+"','"+ abstract +"','" + context + "','"+"/static/img/coverimg/"+h.Filename+"','"+optionsRadiosinline+"',now())"
+	insert_sql := "INSERT INTO content ( title, author,abstract,content,coverimmag,classify,looks,uptime ) VALUES ( '"+title+"','" +author+"','"+ abstract +"','" + context + "','"+"/static/img/coverimg/"+h.Filename+"',"+optionsRadiosinline+",0,now())"
 	o := orm.NewOrm()
 	_,err = o.Raw(insert_sql).Exec()
 	if err ==nil {
 		c.TplName = "edit-text.html"
 	} else{
+		beego.Error(err)
 		c.Ctx.WriteString("存入数据库错误")
 	}
 }

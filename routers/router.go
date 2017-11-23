@@ -11,5 +11,8 @@ func init() {
 	beego.Router("/upcontext", &controllers.UpContextControllers{})
 	beego.Router("/view", &controllers.ViewController{})
 	beego.Router("/editor",&controllers.EditorController{})
+	beego.Router("/aboutus",&controllers.AboutUsController{})
+	beego.Router("/3dphoto",&controllers.PhoneController{})
+	beego.Router("/listpic",&controllers.ListpiceControllers{})
 
 }

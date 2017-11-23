@@ -1,8 +1,7 @@
-@charset "gb2312";
+@charset "utf-8";
 .con_content {
 	overflow: hidden;
-	width: 90%;
-	max-width: 1250px;
+	width: 958px;
 	margin: auto;
 	border: #CCC 1px solid
 }
@@ -46,7 +45,7 @@
 	width: 170px;
 	float: left;
 	margin-top: 10px;
-	background: url(../../static/img/tz.png) no-repeat
+	background: url(/static/img/tz.png) no-repeat
 }
 .con_left ul {
 	margin-top: 36px
@@ -110,13 +109,13 @@
 .nextinfos {
 	text-align: center;
 }
-/* ��̬ */
+/* 动态 */
 .news_list {
 	margin: 10px 0;
 	overflow: hidden
 }
 .news_list li {
-	background: url(../../static/img/libg.jpg) no-repeat left center;
+	background: url(/static/img/libg.jpg) no-repeat left center;
 	;
 	padding-left: 20px;
 	line-height: 26px;
@@ -136,7 +135,7 @@
 	color: #f00;
 	text-decoration: underline
 }
-/* ��ҳ */
+/* 分页 */
 .pagelist {
 	text-align: center;
 	color: #666;
@@ -229,7 +228,7 @@ a.readmore {
 .pingl.f_r {
 	padding: 0;
 }
-/* ����ͼƬ�б�*/
+/* 文字图片列表*/
 .dtxw {
 	overflow: hidden;
 	margin: 30px auto
@@ -332,7 +331,7 @@ a.readmore {
 .dttext {
 	line-height: 24px
 }
-/* ͼƬչʾ */
+/* 图片展示 */
 .lispic {
 	padding: 20px 0;
 	overflow: hidden;

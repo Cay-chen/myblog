@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>个人博客模板古典系列之――江南墨卷</title>
+    <meta name="keywords" content="Cay-Chen个人博客" />
+    <meta name="description" content="Cay-Chen个人博客" />
+<link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/main.css" rel="stylesheet">
+  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script type="text/javascript" src="/static/js/jquery.js"></script>
+
+</head>
+<body>
+<div id="wrapper">
+  <header>
+   {{template "header"}}
+  </header>
+  <div class="con_content">
+    <div class="container" style="width: 100%">
+     <div class="row">
+      <div id="mcontent1" class="col-xs-12 " style="border: 1px solid #d9dadc;background-color: #fff;min-height: 700px; padding:0 20px" >
+        <div class="page-header">
+          <h1 class="text-center">{{.title}}</h1>
+          <p class="text-right">
+            {{.uptime}}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-eye-open" style="color: #337ab7"></span> {{.looks}}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-list-alt"></span>
+            {{.classify}}
+          </p>
+        </div>
+        {{.content}}
+      </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- container代码 结束 -->
+  <footer>
+    {{template "footer"}}
+  </footer>
+</div>
+</body>
+
+<script type="text/javascript" charset="utf-8" src="/static/js/UEditor/ueditor.parse.min.js"></script>
+
+<script>
+
+    uParse(
+        '#mcontent1',
+        {
+        rootPath : '../static/js/UEditor/',
+        chartContainerHeight:500
+    }
+    );
+</script>
+</html>

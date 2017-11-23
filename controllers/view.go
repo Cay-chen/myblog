@@ -42,7 +42,7 @@ func (c *ViewController) Get(){
 	}else{
 		c.Abort("404")
 	}
-	c.TplName = "about.html"
+	c.TplName = "content.html"
 }
 func UpdateLooks(id string){
 	select_sql := "UPDATE content SET looks = looks+1 where id ="+ id

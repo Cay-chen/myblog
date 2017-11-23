@@ -1,4 +1,4 @@
-@charset "gb2312";
+@charset "utf-8";
 .container {
 	background: #e5e5e5;
 	overflow: hidden;
@@ -12,7 +12,7 @@
 	width: 100%;
 	overflow: hidden;
 }
-/*¾íÖá*/
+/*å·è½´*/
 .jztop {
 	background: url(../../static/img/maintopbg.jpg) no-repeat;
 	width: 1034px;
@@ -25,7 +25,7 @@
 	margin: auto;
 	height: 14px;
 }
-/*ÎÄÕÂ*/
+/*æ–‡ç« */
 .bloglist {
 	width: 620px;
 	overflow: hidden;
@@ -36,7 +36,7 @@
 	margin: 20px 0 10px 0;
 	color: #333;
 	font-size: 16px;
-	font-family: "Î¢ÈíÑÅºÚ";
+	font-family: "å¾®è½¯é›…é»‘";
 }
 .bloglist figure {
 	float: left;
@@ -91,7 +91,7 @@ a.readmore {
 	padding-left: 40px;
 	margin: 0 0 10px 0
 }
-/* ¹Ø×¢ÎÒ */
+/* å…³æ³¨æˆ‘ */
 .gzwm ul {
 	width: 100%;
 	overflow: hidden;
@@ -123,7 +123,7 @@ a.readmore {
 .gzwm li a:hover {
 	opacity: 0.6;
 }
-/*Í¼ÎÄÁĞ±í*/
+/*å›¾æ–‡åˆ—è¡¨*/
 .tuwen {
 	width: 100%;
 	clear: both;
@@ -172,7 +172,7 @@ a.readmore {
 .tuwen li:hover {
 	background: #f4f3f3
 }
-/*ÅÅĞĞ*/
+/*!*æ’è¡Œ*!
 .rank li {
 	height: 25px;
 	line-height: 25px;
@@ -181,21 +181,31 @@ a.readmore {
 	overflow: hidden;
 	padding-left: 15px;
 	background: url(../../static/img/libg.jpg) no-repeat left center;
+}*/
+/*æ’è¡Œ*/
+.rank li {
+	list-style: none;
+    height: 35px;
+    line-height: 25px;
+    clear: both;
+    overflow: hidden;
+    padding-left: 15px;
+	margin-left: 10px;
+    background: url(../../static/img/libg.jpg) no-repeat left center;
 }
 .rank {
 	margin: 10px 0
 }
 .rank li a {
-	color: #333;
+    color: #c88326;
 }
-.rank li:first-child a {
-	color: #f00;
-	display: block;
+.rank li span{
+	color: #3b4249;
 }
 .ph {
 	overflow: hidden
 }
-/*Ê×Ò³ÓÒ²à¹ã¸æ 300*/
+/*é¦–é¡µå³ä¾§å¹¿å‘Š 300*/
 .ad {
 	width: 300px;
 	overflow: hidden;

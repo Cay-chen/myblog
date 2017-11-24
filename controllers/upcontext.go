@@ -5,6 +5,11 @@ import (
 	"os"
 	"github.com/astaxie/beego/orm"
 	"fmt"
+	"path"
+	"github.com/qiniu/api.v7/auth/qbox"
+	"github.com/qiniu/api.v7/storage"
+	"context"
+	"github.com/cay/utils"
 )
 
 type UpContextControllers struct{
@@ -18,8 +23,8 @@ func (c *UpContextControllers) Post(){
 	optionsRadiosinline := c.GetString("optionsRadiosinline")
 	abstract := c.GetString("abstract")
 	//创建上传文件夹
-	path := ".\\static\\img\\coverimg"
-	err := os.MkdirAll(path,0777)
+	path1 := ".\\static\\img\\coverimg"
+	err := os.MkdirAll(path1,0777)
 	if err !=nil{
 		beego.Error(err)
 	}
@@ -30,13 +35,15 @@ func (c *UpContextControllers) Post(){
 		beego.Error(err)
 	}
 	//保存上传的图片
-	path1:= path+"\\"+h.Filename
-	fmt.Println("path--------",path1)
-	err = c.SaveToFile("coverimg",path1)
+	path2:= path1+"\\"+h.Filename
+	err = c.SaveToFile("coverimg",path2)
 	if err !=nil {
 		beego.Error(err)
 	}
-	insert_sql := "INSERT INTO content ( title, author,abstract,content,coverimmag,classify,looks,uptime ) VALUES ( '"+title+"','" +author+"','"+ abstract +"','" + context + "','"+"/static/img/coverimg/"+h.Filename+"',"+optionsRadiosinline+",0,now())"
+	nameFile := utils.Md5File(path2)+path.Ext(path2)
+	resQiNiu(path2,nameFile,"myblog-icon-images")
+	delectImage(path2)
+	insert_sql := "INSERT INTO content ( title, author,abstract,content,coverimmag,classify,looks,uptime ) VALUES ( '"+title+"','" +author+"','"+ abstract +"','" + context + "','"+"http://icon.blog.image.84jie.cn/"+nameFile+"',"+optionsRadiosinline+",0,now())"
 	o := orm.NewOrm()
 	_,err = o.Raw(insert_sql).Exec()
 	if err ==nil {
@@ -45,4 +52,32 @@ func (c *UpContextControllers) Post(){
 		beego.Error(err)
 		c.Ctx.WriteString("存入数据库错误")
 	}
+}
+func resQiNiu(localFile,fileName,bucket1 string){
+	ak := "U1Z0InLIRWomOHQ3RHBmeBLBeT2LsBsCaTZbLcRC"
+	sk :="aXK10xN-DgKVOZNuk4yzTKTjtbL7WtrhtSKyOMWX"
+	bucket:=bucket1
+	key := fileName
+	mac := qbox.NewMac(ak,sk)
+
+	putPolicy := storage.PutPolicy{
+		Scope:bucket,
+		ReturnBody: `{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}`,
+	}
+	putPolicy.Expires=7200
+	upToken :=putPolicy.UploadToken(mac)
+	cfg := storage.Config{}
+	formUploader := storage.NewFormUploader(&cfg)
+	ret := MyPutRet{}
+	putExtra := storage.PutExtra{
+		Params: map[string]string{
+			"x:name": "myblog content image",
+		},
+	}
+	err := formUploader.PutFile(context.Background(), &ret, upToken, key, localFile, &putExtra)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println("'''''''''''''''''''",ret.Bucket, ret.Key, ret.Fsize, ret.Hash, ret.Name)
 }

@@ -7,6 +7,7 @@ import (
 	"path"
 	"github.com/cay-chen/golang-utils/utils"
 	"errors"
+	"fmt"
 )
 
 type UpContextControllers struct{
@@ -27,21 +28,23 @@ func (c *UpContextControllers) Post(){
 		beego.Error(err)
 	}
 	//获取上传的文件，直接可以获取表单名称对应的文件名，不用另外提取
-	_, h, err := c.GetFile("upfile")
+	_, h, err := c.GetFile("coverimg")
 	if err != nil {
 		beego.Error(err)
 	}
 	//保存上传的图片
 	//saveImagePath:= localImagePath+"/"+h.Filename //Linux 系统
 	saveImagePath:= localImagePath+"\\"+h.Filename //Windows 系统
-	err = c.SaveToFile("upfile",saveImagePath)
+	fmt.Printf(saveImagePath)
+	err = c.SaveToFile("coverimg",saveImagePath)
 	if err !=nil {
+		fmt.Println("获取文件错误")
+
 		beego.Error(err)
 	}
 	fileName:= utils.Md5File(saveImagePath)+path.Ext(saveImagePath) //获取文件MD5值保存
 	if resQiNiu(saveImagePath,fileName,"myblog-icon-images") ==nil{
 		deleteImage(saveImagePath) //删除文件
-		deleteImage(saveImagePath)
 		insert_sql := "INSERT INTO content ( title, author,abstract,content,coverimmag,classify,looks,uptime ) VALUES ( '"+title+"','" +author+"','"+ abstract +"','" + context + "','"+"http://icon.blog.image.84jie.cn/"+fileName+"',"+optionsRadiosinline+",0,now())"
 		o := orm.NewOrm()
 		_,err = o.Raw(insert_sql).Exec()
